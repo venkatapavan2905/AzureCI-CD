@@ -1,0 +1,64 @@
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+  paths: 
+    include:
+      - result/*
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'a5d27560-6ba2-4b6e-8a30-7dde3e8b380e'
+  imageRepository: 'result-service'
+  containerRegistry: 'azurecicdregistry.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/result/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+pool:
+  name: azureagentpool
+
+
+stages:
+- stage: Build
+  displayName: Build Image
+  jobs:
+  - job: Build
+    displayName: Build
+    steps:
+    - task: Docker@2
+      displayName: Build the image
+      inputs:
+        containerRegistry: '$(dockerRegistryServiceConnection)'
+        repository: '$(imageRepository)'
+        command: 'build'
+        Dockerfile: 'result/Dockerfile'
+        tags: '$(tag)'
+
+- stage: Push
+  displayName: Push Image
+  jobs:
+  - job: Push
+    displayName: Push
+    steps:
+    - task: Docker@2
+      displayName: Push the image to registry
+      inputs:
+        containerRegistry: '$(dockerRegistryServiceConnection)'
+        repository: '$(imageRepository)'
+        command: 'push'
+        tags: '$(tag)'
+
+- stage: update
+  displayName: Deployment stage
+  jobs:
+  - job: update
+    displayName: update_deployment
+    steps:
+    - task: ShellScript@2
+      inputs:
+        scriptPath: 'K8s-UpdateScript/updateK8sScript.sh'
+        args: 'result $(imageRepository) $(tag)'
