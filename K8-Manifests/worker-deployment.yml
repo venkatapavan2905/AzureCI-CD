@@ -15,5 +15,5 @@ spec:
         app: worker
     spec:
       containers:
-      - image: azurecicdregistry.azurecr.io/vote-service:20
+      - image: azurecicdregistry.azurecr.io/worker-service:20
         name: worker
