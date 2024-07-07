@@ -78,13 +78,13 @@ Since ACR is a private repository below secret is used to avoid the ImagePullBac
 ![Screenshot 2024-07-06 225817](https://github.com/venkatapavan2905/AzureCI-CD/assets/138016465/cd1abe65-bbb8-4a9f-ba85-557ef5789208)
 
 
-                                                    Vote Pod
+                                                    Vote service
 
 
 ![Screenshot 2024-07-06 225742](https://github.com/venkatapavan2905/AzureCI-CD/assets/138016465/b3abd630-09b6-43f7-95cf-aef9876255bc)
 
 
-                                                   Result Pod
+                                                   Result service
 
 
 
