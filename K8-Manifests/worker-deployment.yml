@@ -15,5 +15,5 @@ spec:
         app: worker
     spec:
       containers:
-      - image: dockersamples/examplevotingapp_worker
+      - image: azurecicdregistry.azurecr.io/worker-service:20
         name: worker
