@@ -1,5 +1,5 @@
 # AzureCI-CD
-This repo consists of Sample Microservices Voring App required to run a Azure CI CD pipeline.
+Azure DevOps CI-CD Project with microservices
 
 ![image](https://github.com/venkatapavan2905/AzureCI-CD/assets/138016465/1e643c4a-cc6f-4876-9c2d-508e1907e4d1)
 
